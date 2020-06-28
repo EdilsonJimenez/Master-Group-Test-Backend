@@ -12,4 +12,9 @@ module.exports = (app) => {
         verifyMiddelware,
         messageController.createMessage
     ]);
+
+    app.get('/messages/:tag', [
+        verifyMiddelware,
+        messageController.filterMessages
+    ]);
 }
