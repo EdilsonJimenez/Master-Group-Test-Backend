@@ -23,15 +23,16 @@ module.exports = {
     createMessage: (req, res) => {
         fs.readFile(file, 'utf8', (err, data) => {
             if (err) {
-           
+               
                 return res.status(500).send({ message: "Error en el servidor, vuelve a intentarlo en unos minutos" });
             }
+            
             var messages = JSON.parse(data);
             const idMessage = uuid.v1();
             messages[idMessage] = req.body
             messages[idMessage].id = idMessage;
             fs.writeFileSync(file, JSON.stringify(messages), 'utf8');
-            return res.status(200).send({ message: "Mensaje creado exitosamente", id: idMessage });
+            return res.send({ message: "Mensaje creado exitosamente", id: idMessage });
         });
     },
 
